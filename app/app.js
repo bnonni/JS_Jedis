@@ -7,8 +7,10 @@ const createError = require('http-errors'),
   mongoose = require("mongoose"),
   db = require('./models/db'),
   passport = require("passport"),
-  indexRouter = require('./routes/index'),
-  usersRouter = require('./routes/users');
+  index = require('./routes/index'),
+  users = require('./routes/users'),
+  register = require('./routes/register'),
+  login = require('./routes/login');;
 
 var app = express();
 
@@ -23,22 +25,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//homepage render handler
-app.use('/', indexRouter);
-app.use(function (req, res, next) {
+//views render handlers
+//homepage
+app.use('/', index);
+//validator & password encryption
+app.use(passport.initialize());
+require("./config/passport")(passport);
+//register, login, users routes
+app.use('/register', register);
+app.use('/login', login);
+app.use('/users', users);
+
+app.use((req, res, next) => {
   next(createError(404));
 });
-
 //error page render handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);
   res.render('error');
 });
 
-app.use(passport.initialize());
-require("./config/passport")(passport);
-app.use("/users", usersRouter);
+
+
 
 module.exports = app;
