@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" charset="UTF-8">
+<title>Javascript Form</title>
+<script type="text/javascript">
+   function add(){
+       var id = document.getElementById("id").value;
+       var firstName = document.getElementById("firstName").value;
+       var lastName = document.getElementById("lastName").value;
+      
+       if(id=="" || id==null){
+           alert('Id is empty');
+           document.getElementById("idError").innerHTML = "Id is Empty";
+       }
+       else{
+           document.getElementById("idError").innerHTML = "";
+       }
+       if(firstName=="" || firstName==null){
+           alert('First Name is empty');
+           document.getElementById("firstError").innerHTML = "First Name is Empty";
+       }
+       else{
+           document.getElementById("firstError").innerHTML = "";
+       }
+       if(lastName=="" || lastName==null){
+           alert('Last Name is empty');
+           document.getElementById("lastError").innerHTML = "Last Name is Empty";
+       }
+       else{
+           document.getElementById("lastError").innerHTML = "";
+       }
+      
+      
+       if(id=!"" && id!=null && firstName!="" && firstName!=null && lastName!="" && lastName!=null) { // check all conditions
+           var display = "ID: "+id+"<br> FirstName: "+firstName+"<br> LastName: "+lastName;
+           document.getElementById("display").innerHTML = display;
+       }
+       else{
+           document.getElementById("display").innerHTML = "";
+       }
+       return false; // to prevent form submission
+      
+      
+   }
+</script>
+</head>
+<body>
+<form action="#" onsubmit="return add();" method="post" >
+   <!-- Table added for better alignment -->
+   <table>
+       <tr>
+           <td>ID</td>
+           <td><input type="text" id="id" name="id"/></td>
+           <td id="idError" style="color: red;"></td>
+       </tr>
+       <tr>
+           <td>First Name</td>
+           <td><input type="text" id="firstName" name="firstName" /></td>
+           <td id="firstError" style="color: red;"></td>
+       </tr>
+       <tr>
+           <td>LastName</td>
+           <td><input type="text" id="lastName" name="lastName"/></td>
+           <td id="lastError" style="color: red;"></td>
+       </tr>
+      
+       <tr>
+           <td><input type="submit" value="Add"/></td>
+       </tr>
+      
+   </table>
+</form>
+<p id="display">
+</p>
+</body>
+</html>
