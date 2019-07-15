@@ -33,11 +33,7 @@ function register(form) {
 
  var form = document.getElementById("register");
  // If confirm password not entered 
- if ((login_username.length == 0) && (login_password.length == 0)) {
-  alert("Please enter login credentials.");
-  return false;
- }
- else if (register_firstname.length == 0)
+ if (register_firstname.length == 0)
   alert("Please enter your first name");
  // If confirm password not entered 
  else if (register_lastname.length == 0)
