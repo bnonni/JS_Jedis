@@ -6,7 +6,7 @@ router.get('/', function (req, res, next) {
   res.set({
     'Access-control-Allow-Origin': '*'
   });
-  res.render('index', { title: 'Jedi Adventures' });
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 module.exports = router;
