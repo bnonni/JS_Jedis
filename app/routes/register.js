@@ -10,10 +10,10 @@ router.get('/register', function (req, res, next) {
   var register_firstname = req.body.register_firstname;
 
   var data = {
-   "register_password": password,
-   "register_lastname": lastname,
-   "register_username": username,
-   "register_firstname": firstname,
+   "password": register_password,
+   "lastname": register_lastname,
+   "username": register_username,
+   "firstname": register_firstname,
   }
 
   db.collection('users').insertOne(data, function (err, collection) {
