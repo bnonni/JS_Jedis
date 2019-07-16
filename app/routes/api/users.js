@@ -1,24 +1,23 @@
+#!/usr/bin/env nodejs
+
+/*jshint esversion: 6 */
+
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const keys = require("../config/keys");
+const keys = require("../../config/keys");
 const passport = require("passport");
 
 // Load input validation
-const validateRegisterInput = require("../validation/register");
-const validateLoginInput = require("../validation/login");
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
 
 // Load User model
-const User = require("../models/user");
+const User = require("../../models/user");
 
-/* GET home page. */
-router.get("/", (req, res, next) => {
-  res.render("index");
-});
-
-router.get("/register", (req, res) => {
-  res.render("login");
+router.get('/register', (req, res) => {
+  res.render('login');
 });
 
 // @route POST api/users/register
@@ -119,58 +118,3 @@ router.post("/login", (req, res) => {
 });
 
 module.exports = router;
-
-
-//   var username = req.body.reg_username;
-//   var user_pass = req.body.reg_password;
-//   var data = {
-//     "username": username,
-//     "password": user_pass
-//   }
-//   // Submit to the DB
-
-//   /* Print documents in collection named 'col' */
-//   mongo.collection('users').find({ "username": data.username }, (err, doc) => {
-//     if (err) {
-//       res.send("User login does not exist.");
-//       res.redirect("register");
-//     }
-//     else {
-//       res.send("Saved user to Mongo successfully!")
-//       res.redirect("dashboard");
-//     }
-//   });
-// });
-// router.post('/register', (req, res) => {
-//   // Get our form values
-//   var first = req.body.firstname;
-//   var last = req.body.lastname;
-//   var username = req.body.reg_username;
-//   var password = req.body.reg_password;
-
-//   //Create new mongoose schema
-//   var user = new User({ first, last, username, password });
-
-//   //Save user to db
-//   user.save()
-//     .then(item => {
-//       res.redirect("login");
-//       console.log(item + " saved to Database!")
-//     })
-//     .catch(err => {
-//       res.redirect("error");
-//       console.log("Error saving to database " + err);
-//     });
-// });
-// module.exports = router;
-
-// router.get('/login', (req, res) => {
-//   res.render('login');
-// })
-
-// router.get('/register', (req, res) => {
-//   res.render('login');
-// });
-// var express = require('express'); //require middleware
-// var router = express.Router(); //import router
-// // const User = require('../models/user'); //require mongoose connection & model

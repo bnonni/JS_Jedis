@@ -1,9 +1,8 @@
-const mongoose = require('mongoose');
+const uri = require('../config/keys'),
+  mongoose = require("mongoose");
 
-var userSchema = new mongoose.Schema({
- name: String,
- email: String,
- password: String
-});
-module.exports = user = mongoose.model("users", userSchema);
+var db = mongoose.connect(uri.MongoURI, { useNewUrlParser: true });
+var userSchema = new mongoose.Schema({ first: String, last: String, username: String, password: String });
+var user = mongoose.model("users", userSchema);
 
+module.exports = user;

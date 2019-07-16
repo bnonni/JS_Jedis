@@ -4,40 +4,34 @@ const createError = require('http-errors'),
   cookieParser = require('cookie-parser'),
   bodyParser = require("body-parser"),
   logger = require('morgan'),
-  mongoose = require("mongoose"),
-  db = require('./models/db'),
   passport = require("passport"),
   index = require('./routes/index'),
-  users = require('./routes/users'),
-  register = require('./routes/register'),
-  login = require('./routes/login');;
+  users = require("./routes/api/users");;
 
 var app = express();
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'public'));
-app.use(express.static('public'))
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 //server packages setup
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-//views render handlers
-//homepage
+//view render handlers
 app.use('/', index);
 //validator & password encryption
 app.use(passport.initialize());
 require("./config/passport")(passport);
-
-app.use('/login', login);
-
-// app.use('/register', register);
+// app.use("/api/users", users);
 
 app.use((req, res, next) => {
   next(createError(404));
 });
+
 //error page render handler
 app.use((err, req, res, next) => {
   res.locals.message = err.message;
@@ -46,6 +40,4 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-
 module.exports = app;
-
