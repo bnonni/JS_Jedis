@@ -1,176 +1,69 @@
-const express = require("express");
-const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const keys = require("../config/keys");
-const passport = require("passport");
+var express = require('express'); //require middleware
+var router = express.Router(); //import router
+const User = require('../models/user'); //require mongoose connection & model
 
-// Load input validation
-const validateRegisterInput = require("../validation/register");
-const validateLoginInput = require("../validation/login");
-
-// Load User model
-const User = require("../models/user");
-
-/* GET home page. */
+/* Get home page */
 router.get("/", (req, res, next) => {
   res.render("index");
+});
+
+router.get('/login', (req, res) => {
+  res.render('login');
+  var username = req.body.reg_username;
+  var user_pass = req.body.reg_password
+
+  User.get('users').findOne({ "username": username }, (err, user) => {
+    err = { error: "Login failed!", message: "Please register for an account!" };
+    if (err) {
+      req.flash('fail_message', err);
+      res.redirect('login', err)
+    } else {
+      user.comparePassword(user_pass, function (err, isMatch) {
+        if (err) {
+          err.message = "Password Invalid!";
+          req.flash('fail_message', err);
+          res.redirect('login', err);
+        }
+        else {
+          req.flash("success_msg", "Valid credentials, logging in. Please wait!");
+          res.redirect("dashboard");
+        }
+      });
+    }
+  });
 });
 
 router.get("/register", (req, res) => {
   res.render("login");
 });
 
-// @route POST api/users/register
-// @desc Register user
-// @access Public
-router.post("/register", (req, res) => {
-  // Form validation
+router.post('/register', (req, res) => {
+  // Get our form values
+  var first = req.body.firstname;
+  var last = req.body.lastname;
+  var username = req.body.reg_username;
+  var email = req.body.email;
+  var password = req.body.reg_password;
 
-  const { errors, isValid } = validateRegisterInput(req.body);
+  //Create new mongoose schema
+  var user = new User({ first, last, email, username, password });
 
-  // Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
-  User.findOne({ email: req.body.email }).then(user => {
-    if (user) {
-      return res.status(400).json({ email: "Email already exists" });
-    } else {
-      const newUser = new User({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        username: req.body.username,
-        password: req.body.password
-      });
-
-      // Hash password before saving in database
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          newUser.password = hash;
-          newUser
-            .save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err));
-        });
-      });
-    }
-  });
-});
-
-router.get('/login', (req, res) => {
-  res.render('login');
-});
-// @route POST api/users/login
-// @desc Login user and return JWT token
-// @access Public
-router.post("/login", (req, res) => {
-  // Form validation
-
-  const { errors, isValid } = validateLoginInput(req.body);
-
-  // Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
-  const email = req.body.email;
-  const password = req.body.password;
-
-  // Find user by email
-  User.findOne({ email }).then(user => {
-    // Check if user exists
-    if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
-    }
-
-    // Check password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        // User matched
-        // Create JWT Payload
-        const payload = {
-          id: user.id,
-          name: user.name
-        };
-
-        // Sign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey, {
-            expiresIn: 31556926 // 1 year in seconds
-          },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
-          }
-        );
-      } else {
-        return res
-          .status(400)
-          .json({ passwordincorrect: "Password incorrect" });
-      }
+  //Save user to db
+  user.save()
+    .then(item => {
+      req.flash('success_msg', 'You are registered and can now log in!');
+      res.redirect("login");
+      console.log(item + " saved to Database!")
+    })
+    .catch(err => {
+      res.redirect("error");
+      console.log("Error saving to database " + err);
     });
-  });
 });
+
+router.get("/dashboard", (req, res) => {
+  res.render("dashboard");
+});
+
 
 module.exports = router;
-
-
-//   var username = req.body.reg_username;
-//   var user_pass = req.body.reg_password;
-//   var data = {
-//     "username": username,
-//     "password": user_pass
-//   }
-//   // Submit to the DB
-
-//   /* Print documents in collection named 'col' */
-//   mongo.collection('users').find({ "username": data.username }, (err, doc) => {
-//     if (err) {
-//       res.send("User login does not exist.");
-//       res.redirect("register");
-//     }
-//     else {
-//       res.send("Saved user to Mongo successfully!")
-//       res.redirect("dashboard");
-//     }
-//   });
-// });
-// router.post('/register', (req, res) => {
-//   // Get our form values
-//   var first = req.body.firstname;
-//   var last = req.body.lastname;
-//   var username = req.body.reg_username;
-//   var password = req.body.reg_password;
-
-//   //Create new mongoose schema
-//   var user = new User({ first, last, username, password });
-
-//   //Save user to db
-//   user.save()
-//     .then(item => {
-//       res.redirect("login");
-//       console.log(item + " saved to Database!")
-//     })
-//     .catch(err => {
-//       res.redirect("error");
-//       console.log("Error saving to database " + err);
-//     });
-// });
-// module.exports = router;
-
-// router.get('/login', (req, res) => {
-//   res.render('login');
-// })
-
-// router.get('/register', (req, res) => {
-//   res.render('login');
-// });
-// var express = require('express'); //require middleware
-// var router = express.Router(); //import router
-// // const User = require('../models/user'); //require mongoose connection & model

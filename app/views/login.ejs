@@ -5,8 +5,10 @@
  <meta charset="UTF-8">
  <title>Login</title>
  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+ <script src="../validation/register.js"></script>
  <script src="../js/login_register.js"></script>
  <link href="../css/login.css" rel="stylesheet" type="text/css">
+ <% include ./partials/_messages %>
 </head>
 
 <body>
@@ -21,7 +23,6 @@
  <div id="main">
   <div class="heading">
    <h1>Welcome to Jedi Adventures</h1>
-   <h5>May the force be with you...</h5>
   </div>
   <span id="menu" onclick="openNav()">&#9776; Menu</span>
  </div>
@@ -47,7 +48,7 @@
     </form>
    </div>
    <div class="register-show">
-    <form method="POST" action="/register" id="register_form" onsubmit="register(this)">
+    <form method="POST" action="/register" id="register_form" onsubmit="validateRegisterInput(this)">
      <h2>Register</h2>
      <input type="text" name="name" placeholder="First and Last Name">
      <input type="text" name="email" placeholder="Email">

@@ -5,8 +5,7 @@ const createError = require('http-errors'),
   bodyParser = require("body-parser"),
   logger = require('morgan'),
   passport = require("passport"),
-  index = require('./routes/index'),
-  users = require("./routes/api/users");;
+  index = require('./routes/index');
 
 var app = express();
 
@@ -23,10 +22,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //view render handlers
 app.use('/', index);
-//validator & password encryption
-app.use(passport.initialize());
-require("./config/passport")(passport);
-// app.use("/api/users", users);
 
 app.use((req, res, next) => {
   next(createError(404));

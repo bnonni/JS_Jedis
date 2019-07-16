@@ -1,5 +1,3 @@
-#!/usr/bin/env nodejs
-
 /*jshint esversion: 6 */
 
 const Validator = require("validator");
@@ -27,7 +25,7 @@ module.exports = function validateRegisterInput(data) {
     }
 
     // Password checks
-    if (Validator.isEmpty(data.password)) {
+    if (Validator.isEmpty(data.password1)) {
         errors.password = "Password field is required";
     }
 
