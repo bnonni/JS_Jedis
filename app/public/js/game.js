@@ -170,7 +170,7 @@ function hitBomb(player, bomb) {
  if (gameOver) {
   saveScore(score);
   var again = document.getElementById('play_again');
-  again.append('<button id="play_again" onclick="window.location.reload()">Play Again?</button>')
+  again.innerHTML = '<span style="margin-top: 1em;class="replay" id="menu" onclick="window.location.reload()">Play Again?</span>';
  }
 }
 
@@ -180,5 +180,4 @@ function saveScore(score) {
  console.log(scores);
  document.cookie = "high score=" + scores;
  console.log(document.cookie);
- document.getElementById("logout").onclick()
 }
