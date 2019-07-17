@@ -39,26 +39,19 @@ How to Install
       ```
    - Otherwise, simply open the JS_Jedis folder with your editor
 
+
 3. Inside app/ folder, install dependencies:
    ```
    npm install
    ```
+
 4. Open the mongo.env file, and add your database credentials
 
-5. Ensure that the source.sh file has user rwx permissions (-rwx------). To check, run this command in app/ folder:
+5. Add those to your env.
    ```
-   ls -l 
-   ```
-   - If you see -rwx------ to the left of source.sh, you're good to move on.
-   - If not, run:
-   ```
-   chmod 700 source.sh
+   source mongo.env
    ```
 
-6. Execute the source.sh script
-   ```
-   ./source.sh
-   ```
 6. Finally, let's run our app!
    ```
    npm start
