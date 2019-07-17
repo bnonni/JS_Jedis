@@ -43,6 +43,9 @@
      <% if (typeof login_fail_msg !== 'undefined' && login_fail_msg.length > 0){ %>
      <div class="alert__fail"><%= login_fail_msg %></div>
      <% } %>
+     <% if (typeof register_success_msg !== 'undefined' && register_success_msg.length > 0){ %>
+     <div class="alert__fail"><%= register_success_msg %></div>
+     <% } %>
      <input type="text" name="log_username" placeholder="Username">
      <input type="password" name="log_password" placeholder="Password">
      <input type="submit" value="Login">

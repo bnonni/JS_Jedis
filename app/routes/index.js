@@ -61,15 +61,13 @@ router.post("/register", (req, res) => {
   //Save user to db
   user.save()
     .then(item => {
-      res.render("login");
+      res.render("login", { register_success_msg: "Registration Successful! Please login!" });
       console.log(item + " saved to Database!")
     })
     .catch(err => {
-      var error = "Registration failed! Please try again!";
-      res.render("login", { register_fail_msg: error });
+      res.render("login", { register_fail_msg: "Registration failed! Please try again!" });
       console.log("Error saving to database " + err);
     });
 });
-
 
 module.exports = router;

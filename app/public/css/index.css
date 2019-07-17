@@ -57,7 +57,7 @@ html {
 #teaser {
   height: 650px;
   width: 50%;
-  background-image: url(../images/game.png);
+  background-image: url(../images/game.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
   margin: 0 auto;
@@ -88,10 +88,11 @@ html {
   /* float: right; */
   margin: 0 auto;
   padding: 2% 5%;
-  top: 40%;
-  left: 40%;
+  top: 75%;
+  left: 15%;
   border: 11px solid black;
   background: white;
+  margin-right: 28%;
 }
 
 a {
