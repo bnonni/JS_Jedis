@@ -54,6 +54,16 @@ html {
  margin-left: 50px;
 }
 
+#teaser {
+  height: 650px;
+  width: 50%;
+  background-image: url(../images/game.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  margin-top: 2%;
+}
+
 #main {
  transition: margin-left .5s;
  padding: 16px;
@@ -75,9 +85,17 @@ html {
   cursor: pointer;
   border-radius: 5px;
   position: relative;
-  bottom: 50px;
-  left: 20px;
-  background-color: white;
+  /* float: right; */
+  margin: 0 auto;
+  padding: 2% 5%;
+  top: 40%;
+  left: 40%;
+  border: 11px solid black;
+  background: white;
+}
+
+a {
+  text-decoration: none;
 }
 
 .heading {

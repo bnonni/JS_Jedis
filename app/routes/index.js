@@ -7,7 +7,7 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
-router.get("/login/game", (req, res) => {
+router.get("/game", (req, res) => {
   res.render("game");
 });
 
@@ -43,7 +43,7 @@ router.post("/login", (req, res) => {
     }
     else if ((!err) && (userpass == user.password)) {
       console.log(user);
-      res.redirect(302, "/login/game");
+      res.redirect(302, "/game");
     }
   })
 });
