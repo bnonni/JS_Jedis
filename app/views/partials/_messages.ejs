@@ -1,8 +1,4 @@
-<% let success_msg = '' %>
-<% if (success_msg != '') { %>
-<div class="alert alert__success"><%= success_msg %></div>
-<% } %>
-<% let error_msg = '' %>
-<% if (error_msg != '') { %>
-<div class="alert alert__fail"><%= error_msg %></div>
+<% fail_msg = fail_msg%>
+<% if (fail_msg != '') { %>
+<div class="alert__fail"><%= fail_msg %></div>
 <% } %>

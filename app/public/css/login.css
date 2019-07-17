@@ -228,7 +228,7 @@ a {
      cursor:pointer;
      border-radius: 5px;
      position: relative;
-     bottom: 50px;
+     top: 100px;
      left: 20px;
    }
    .heading {
@@ -240,4 +240,9 @@ a {
     
     h1, h5{
      text-align: center;
+    }
+
+    .alert__fail{
+        color: red;
+        font-weight: 800;
     }

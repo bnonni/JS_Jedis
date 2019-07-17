@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Mukta");
 
+
 body {
     font-family: "Mukta", sans-serif;
     height: 100vh;
@@ -70,17 +71,18 @@ html {
 
 #menu {
   color: black;
-  font-size:25px;
-  cursor:pointer;
+  font-size: 25px;
+  cursor: pointer;
   border-radius: 5px;
   position: relative;
   bottom: 50px;
   left: 20px;
+  background-color: white;
 }
 
 .heading {
 background-color: white;
-width: 100%;
+width: 50%;
 margin: 0 auto;
 padding: 10px 0;
 }
