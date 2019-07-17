@@ -246,3 +246,7 @@ a {
         color: red;
         font-weight: 800;
     }
+    .alert__success{
+        color: green;
+        font-weight: 800;
+    }
