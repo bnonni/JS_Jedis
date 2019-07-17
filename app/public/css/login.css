@@ -223,17 +223,19 @@ a {
    }
    
    #menu {
-     color: black;
-     font-size:25px;
-     cursor:pointer;
-     border-radius: 5px;
-     position: relative;
-     top: 100px;
-     left: 20px;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    margin: 0 auto;
+    border: 5px solid white;
+    background: black;
+    margin-right: 28%;
    }
    .heading {
     background-color: white;
-    width: 100%;
+    width: 50%;
     margin: 0 auto;
     padding: 10px 0;
     }

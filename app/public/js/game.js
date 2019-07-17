@@ -157,20 +157,28 @@ function collectStar(player, star) {
   bomb.setCollideWorldBounds(true);
   bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
   bomb.allowGravity = false;
-
+  saveScore(score);
  }
+
 }
 
 function hitBomb(player, bomb) {
  this.physics.pause();
-
  player.setTint(0xff0000);
-
  player.anims.play('turn');
-
  gameOver = true;
  if (gameOver) {
-  alert('Game Over!');
-  return window.location.reload();
+  saveScore(score);
+  var again = document.getElementById('play_again');
+  again.append('<button id="play_again" onclick="window.location.reload()">Play Again?</button>')
  }
+}
+
+function saveScore(score) {
+ var scores = [];
+ scores.push(score)
+ console.log(scores);
+ document.cookie = "high score=" + scores;
+ console.log(document.cookie);
+ document.getElementById("logout").onclick()
 }

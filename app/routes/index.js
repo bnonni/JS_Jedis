@@ -23,7 +23,14 @@ router.get("/leaderboard", (req, res) => {
   res.render("leaderboard");
 });
 
+router.get("/logout", (req, res) => {
+  var logout = res.clearCookie(req.body.log_username + "Data", req.user);
+  console.log(logout);
+  res.render("login", { logout_msg: "You've successfully logged out! See you soon!" });
+});
+
 router.post("/login", (req, res) => {
+
   var username = req.body.log_username;
   var userpass = req.body.log_password
 
@@ -42,7 +49,6 @@ router.post("/login", (req, res) => {
       res.render("login", { login_fail_msg: "Password Invalid! Please try again." });
     }
     else if ((!err) && (userpass == user.password)) {
-      console.log(user);
       res.redirect(302, "/game");
     }
   })

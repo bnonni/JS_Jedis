@@ -80,19 +80,15 @@ html {
 }
 
 #menu {
-  color: black;
-  font-size: 25px;
-  cursor: pointer;
-  border-radius: 5px;
-  position: relative;
-  /* float: right; */
-  margin: 0 auto;
-  padding: 2% 5%;
-  top: 75%;
-  left: 15%;
-  border: 11px solid black;
-  background: white;
-  margin-right: 28%;
+  color: white;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    margin: 0 auto;
+    border: 5px solid white;
+    background: black;
+    margin-right: 28%;
 }
 
 a {

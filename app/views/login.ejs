@@ -18,8 +18,8 @@
   <a href="/leaderboard">Leaderboard</a>
  </div>
  <div id="main">
+  <span id="menu" onclick="openNav()">&#9776; Menu</span>
   <div class="heading">
-   <span id="menu" onclick="openNav()">&#9776; Menu</span>
    <h1>Welcome to Jedi Adventures</h1>
   </div>
  </div>
@@ -46,6 +46,9 @@
      <% if (typeof register_success_msg !== 'undefined' && register_success_msg.length > 0){ %>
      <div class="alert__success"><%= register_success_msg %></div>
      <% } %>
+     <% if (typeof logout_msg !== 'undefined' && logout_msg.length > 0){ %>
+     <div class="alert__success"><%= logout_msg %></div>
+     <% } %>
      <input type="text" name="log_username" placeholder="Username">
      <input type="password" name="log_password" placeholder="Password">
      <input type="submit" value="Login">
@@ -68,6 +71,14 @@
   </div>
  </div>
  <script>
+  function clearText() {
+   for (var i = 10; i >= 0; i--) {
+    if (i == 1) {
+     $('div.alert__fail').fadeOut();
+     $('div.alert__success').fadeOut();
+    }
+   }
+  }
   $(document).ready(function () {
    $(".login-info-box").fadeOut();
    $(".login-show").addClass("show-log-panel");
@@ -93,6 +104,10 @@
     $(".register-show").removeClass("show-log-panel");
    }
   });
+
+  window.setTimeout(() => {
+   clearText();
+  }, 1000);
  </script>
 </body>
 

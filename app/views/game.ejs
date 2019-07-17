@@ -18,11 +18,17 @@
         <a href="/login">Login</a>
         <a href="/register" onclick="registerClass()">Register</a>
         <a href="/leaderboard">Leaderboard</a>
+        <a id="logout" href="/logout">Logout</a>
     </div>
-    <span id="menu" onclick="openNav()">&#9776; Menu</span>
-    <% if (typeof success_msg !== 'undefined' && success_msg.length > 0){ %>
-    <div class="alert__success"><%= success_msg %></div>
-    <% } %>
+    <div id="main">
+        <div class="heading">
+            <span id="menu" onclick="openNav()">&#9776; Menu</span>
+        </div>
+        <% if (typeof success_msg !== 'undefined' && success_msg.length > 0){ %>
+        <div class="alert__success"><%= success_msg %></div>
+        <% } %>
+        <span id="play_again"></span>
+    </div>
 </body>
 
 </html>
