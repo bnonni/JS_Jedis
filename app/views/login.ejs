@@ -55,7 +55,7 @@
     </form>
    </div>
    <div class="register-show">
-    <form method="POST" action="/register" id="register_form" onsubmit="validateRegisterInput(this)">
+    <form method="POST" action="/register" id="register_form" onsubmit="register(this)">
      <h2>Register</h2>
      <% if (typeof register_fail_msg !== 'undefined' && register_fail_msg.length > 0){ %>
      <div class="alert__fail"><%= register_fail_msg %></div>
