@@ -176,8 +176,8 @@ function hitBomb(player, bomb) {
 
 function saveScore(score) {
  var data = [];
- data.push(score, name)
- console.log(scores);
+ data.push(score)
+ console.log(score);
  document.cookie = "high score=" + data;
  console.log(document.cookie);
 }

@@ -19,6 +19,7 @@ app.use(session({
   store: new FileStore,
   cookie: session_cookie
 }));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
